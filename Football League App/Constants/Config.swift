@@ -10,14 +10,16 @@ import Foundation
 struct Config{
     struct Nibs{
         static let competitionCell = "CompetitionViewCell"
+        static let competitionTeams = "CompTeamsViewCell"
     }
     
     struct StoryBoards{
-        static let competiton = "CompetitonVC"
+        static let main = "Main"
     }
     
     struct ViewControllers{
-        
+        static let competition = "CompetitonVC"
+        static let competitionTeams = "CompetitionTeamsVC"
     }
     
     struct APIs{

@@ -7,4 +7,7 @@ target 'Football League App' do
 
   # Pods for Football League App
 pod 'Alamofire'
+pod 'PullToRefresher'
+pod 'ESPullToRefresh'
+pod 'Kingfisher'
 end

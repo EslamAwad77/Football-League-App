@@ -1,5 +1,5 @@
 //
-//  CompetitonVC.swift
+//  CompetitionTeamsVC.swift
 //  Football League App
 //
 //  Created by eslam awad elsayed awad on 07/10/2022.
@@ -9,27 +9,30 @@ import UIKit
 import ESPullToRefresh
 import PullToRefresh
 
-class CompetitonVC: UIViewController {
-    
+class CompetitionTeamsVC: UIViewController {
     // Variables :-
-    var controller: CompetitonController? = CompetitonController()
-    var competitions: [CompetitionModel] = []
+    var controller: CompetitionTeamsController? = CompetitionTeamsController()
+    var competitionsTeams: [CompetitionTeamsModel] = []
+    
     // Outlets :-
     @IBOutlet weak var tblView: UITableView!
-    @IBOutlet weak var lblErrorDesc: UILabel!
     @IBOutlet weak var activityLoadingPage: UIActivityIndicatorView!
     @IBOutlet weak var viewReloading: UIView!
+    @IBOutlet weak var lblErrorDesc: UILabel!
+    
     
     // Actions :-
     @IBAction func btnReloadingPagePressed(_ sender: UIButton) {
         loadData()
         getData()
     }
+    
+    
 }
 
-// Lifecycle Of Screen : -
+// Lifecycle :-
 
-extension CompetitonVC{
+extension CompetitionTeamsVC{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -37,17 +40,17 @@ extension CompetitonVC{
     }
 }
 
-extension CompetitonVC{
+extension CompetitionTeamsVC{
     private func setupUI(){
         loadData()
         self.pullTorefresh()
         tblView.delegate = self
         tblView.dataSource = self
-        tblView.register(UINib.init(nibName: Config.Nibs.competitionCell, bundle: nil), forCellReuseIdentifier: Config.Nibs.competitionCell)
+        tblView.register(UINib.init(nibName: Config.Nibs.competitionTeams, bundle: nil), forCellReuseIdentifier: Config.Nibs.competitionTeams)
     }
 }
 
-extension CompetitonVC{
+extension CompetitionTeamsVC{
     func loadData(){
         self.activityLoadingPage.startAnimating()
         self.viewReloading.alpha = 0
@@ -55,18 +58,18 @@ extension CompetitonVC{
     }
 }
 
-extension CompetitonVC{
+extension CompetitionTeamsVC{
     func getData(){
-        controller?.loadCompetition(success: { response in
+        controller?.loadCompetitionTeams(success: { response in
             self.tblView.es.stopPullToRefresh()
             self.tblView.es.stopLoadingMore()
             self.hideError()
             if !(response.isEmpty){
-                self.competitions = response
+                self.competitionsTeams = response
                 self.tblView.reloadData()
             } else{
                 self.showError()
-                self.lblErrorDesc.text = "Can't Loading Competitions"
+                self.lblErrorDesc.text = "Can't Loading Competition Teams"
             }
         }, error: { err in
             self.showError()
@@ -78,7 +81,7 @@ extension CompetitonVC{
     }
 }
 
-extension CompetitonVC{
+extension CompetitionTeamsVC{
     func hideError(){
         self.tblView.alpha = 1
         self.viewReloading.alpha = 0
@@ -87,7 +90,7 @@ extension CompetitonVC{
     }
 }
 
-extension CompetitonVC{
+extension CompetitionTeamsVC{
     func pullTorefresh(){
         //if refresh from Top
         self.tblView.es.addPullToRefresh { [weak self] in
@@ -103,7 +106,7 @@ extension CompetitonVC{
     }
 }
 
-extension CompetitonVC{
+extension CompetitionTeamsVC{
     func showError(){
         self.activityLoadingPage.alpha = 0
         self.activityLoadingPage.stopAnimating()
@@ -112,8 +115,10 @@ extension CompetitonVC{
     }
 }
 
+extension CompetitionTeamsVC{
+    
+}
 
-
-extension CompetitonVC{
+extension CompetitionTeamsVC{
     
 }

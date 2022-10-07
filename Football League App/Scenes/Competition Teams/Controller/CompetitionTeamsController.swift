@@ -1,5 +1,5 @@
 //
-//  CompetitonController.swift
+//  CompetitionTeamsController.swift
 //  Football League App
 //
 //  Created by eslam awad elsayed awad on 07/10/2022.
@@ -7,11 +7,11 @@
 
 import Alamofire
 
-class CompetitonController{
+class CompetitionTeamsController{
     //Brain
-    func loadCompetition(success:(([CompetitionModel])->())?,error:((String)->())?){
-        let url = Config.APIs.competition
-        AF.request(url).response { response in
+    func loadCompetitionTeams(success:(([CompetitionTeamsModel])->())?,error:((String)->())?){
+        let url = Config.APIs.competitionTeams
+        AF.request(url, headers: ["X-Auth-Token": "b3d79cbe816f47828b19a8f8f8d2a5a7"]).response { response in
             guard response.error == nil else {
                 print("error \(response.error!)")
                 return
@@ -20,13 +20,13 @@ class CompetitonController{
             case .success(let data) :
                     do {
                         let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                        let competitionsArr = json?["competitions"] as? [[String: Any]]
-                        var competitionModelArr = [CompetitionModel]()
-                        for competition in competitionsArr ?? [] {
-                            let model = CompetitionModel.init(apiModel: competition)
-                            competitionModelArr.append(model)
+                        let competitionTeams = json?["teams"] as? [[String: Any]]
+                        var teamModelArr = [CompetitionTeamsModel]()
+                        for team in competitionTeams ?? [] {
+                            let model = CompetitionTeamsModel.init(apiModel: team)
+                            teamModelArr.append(model)
                         }
-                        success?(competitionModelArr)
+                        success?(teamModelArr)
                     } catch let err {
                         print(err.localizedDescription)
                         error?(err.localizedDescription)

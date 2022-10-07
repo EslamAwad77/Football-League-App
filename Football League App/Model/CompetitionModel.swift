@@ -9,12 +9,12 @@ import Foundation
 
 class CompetitionModel{
     var id: Int = 0
-    var area: AreaModel?
+    var area: CompetitionAreaModel?
     var name: String = ""
     var code: String = ""
     var emblemUrl: String = ""
     var plan: String = ""
-    var currentSeason: SeasonModel?
+    var currentSeason: CompetitionSeasonModel?
     var numberOfAvailableSeasons: Int = 0
     var lastUpdated: String = ""
     
@@ -22,18 +22,18 @@ class CompetitionModel{
     
     init(apiModel: [String: Any]?){
         self.id = (apiModel?["id"] as? Int) ?? 0
-        self.area = AreaModel.init(apiModel: apiModel?["area"] as? [String: Any])
+        self.area = CompetitionAreaModel.init(apiModel: apiModel?["area"] as? [String: Any])
         self.name = (apiModel?["name"] as? String) ?? "No Name ِِExist"
         self.code = (apiModel?["code"] as? String) ?? "No code ِِExist"
         self.emblemUrl = (apiModel?["emblemUrl"] as? String) ?? "No emblemUrl ِِExist"
         self.plan = (apiModel?["plan"] as? String) ?? "No Plan ِِExist"
-        self.currentSeason = SeasonModel.init(apiModel: apiModel?["currentSeason"] as? [String: Any])
+        self.currentSeason = CompetitionSeasonModel.init(apiModel: apiModel?["currentSeason"] as? [String: Any])
         self.numberOfAvailableSeasons = (apiModel?["numberOfAvailableSeasons"] as? Int) ?? 0
         self.lastUpdated = (apiModel?["lastUpdated"] as? String) ?? "No lastUpdated ِِExist"
     }
 }
 
-class AreaModel{
+class CompetitionAreaModel{
     var id: Int = 0
     var name: String = ""
     var countryCode: String = ""
@@ -48,7 +48,7 @@ class AreaModel{
     }
 }
 
-class SeasonModel{
+class CompetitionSeasonModel{
     var id: Int = 0
     var startDate: String = ""
     var endDate: String = ""
